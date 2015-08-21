@@ -37,7 +37,7 @@ describe('the stylist path') do
     end
   end
 
-  describe('adding a new client to on the stylist page') do
+  describe('adding a new client to on the stylist page', {:type => :feature}) do
     it 'allows you to add a client to a stylist from the stylist page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
@@ -48,7 +48,7 @@ describe('the stylist path') do
     end
   end
 
-  describe('changing the name of a stylist') do
+  describe('changing the name of a stylist', {:type => :feature}) do
     it 'allows you to change the name of a stylist from the stylist page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
@@ -59,7 +59,7 @@ describe('the stylist path') do
     end
   end
 
-  describe('deleting a stylist') do
+  describe('deleting a stylist', {:type => :feature}) do
     it 'allows you to delete a stylist and delivers you to back to the stylists page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
@@ -105,7 +105,7 @@ describe('the client path') do
     end
   end
 
-  describe('changing the name of a client') do
+  describe('changing the name of a client', {:type => :feature}) do
     it 'allows you to change the name of a client on the client page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
@@ -118,7 +118,7 @@ describe('the client path') do
     end
   end
 
-  describe('deleting a client') do
+  describe('deleting a client', {:type => :feature}) do
     it 'allows you to delete a client and delivers you to back to the clients page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
