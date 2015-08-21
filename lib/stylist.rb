@@ -22,6 +22,16 @@ class Stylist
     @id = result.first.fetch("id").to_i
   end
 
+  def update(attributes)
+    @name = attributes.fetch(:name)
+    @id = self.id
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM stylists WHERE id = #{self.id};")
+  end
+
   def self.find(id)
     Stylist.all.each do |stylist|
       if stylist.id == id
