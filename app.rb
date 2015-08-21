@@ -111,7 +111,7 @@ patch '/clients/:id' do #done
   if new_name == ""
     new_name = @client.name
   end
-    
+
   @client.update({name: new_name, stylist_id: new_stylist_id})
   @stylist = @client.stylist
   @stylists = Stylist.all

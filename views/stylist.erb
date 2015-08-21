@@ -1,12 +1,49 @@
 <div class="row text-center">
   <h3>stylist detail</h3>
+  <h4><%= @stylist.name %></h4>
 
   <table class="table table-hover">
     <tr id="first-row">
-      <th width="40%" class="text-center">name: <%= @stylist.name %></th>
+      <th width="40%" class="text-center">clients</th>
       <!-- <th width="40%" class="text-center">stylist: < stylist.name %></th> -->
       <th width="10%"></th>
       <th width="10%"></th>
+    </tr>
+
+    <% @clients.each do |client| %>
+      <tr>
+        <td class="text-center">
+          <a href="/clients/<%= client.id %>"><%= client.name %></a>
+        </td>
+
+        <td></td>
+
+        <form action="/clients/<%= client.id %>" method="post">
+          <td>
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" name="delete" class="form-control btn btn-danger btn-sm">delete client</button>
+          </td>
+        </form>
+      </tr>
+    <% end %>
+
+    <tr>
+      <form class="form-inline" action="/clients/new" method="post">
+
+        <td width="40%">
+          <label hidden for="name">new client name</label>
+          <input class="form-control" type="text" name="name" id="name" placeholder="new client name" required>
+
+          <input type="hidden" name="stylist_id" value="<%= @stylist.id %>">
+        </td>
+
+        <td></td>
+
+        <td width="10%">
+          <button class="btn btn-primary btn-sm form-control" name="submit" type="submit">+ client</button>
+        </td>
+
+      </form>
     </tr>
 
     <tr>
