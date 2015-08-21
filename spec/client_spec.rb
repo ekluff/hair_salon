@@ -10,30 +10,30 @@ describe Client do
 
   describe '#name' do
     it 'tells you its name' do
-      client = Client.new({ name: 'Tacocat de Gato', id: nil })
+      client = Client.new({ name: 'Tacocat de Gato', stylist_id: 0, id: nil })
       expect(client.name).to eq 'Tacocat de Gato'
     end
   end
 
   describe '#id' do
     it 'sets its ID when you save it' do
-      client = Client.new({name: 'Tacocat de Gato', id: nil})
+      client = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client.save()
       expect(client.id()).to(be_an_instance_of(Fixnum))
     end
   end
 
   describe '#save' do
-    it 'lets you save stylists to the database' do
-      client = Client.new({name: 'Tacocat de Gato', id: nil})
+    it 'lets you save clients to the database' do
+      client = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client.save()
       expect(Client.all()).to(eq([client]))
     end
   end
 
   describe 'update' do
-    it 'lets you update stylists in the database' do
-      client = Client.new({name: 'Tacocat de Gato', id: nil})
+    it 'lets you update clients in the database' do
+      client = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client.save
       client.update({name: 'Tacocat de Perro'})
       expect(client.name).to(eq('Tacocat de Perro'))
@@ -42,9 +42,9 @@ describe Client do
 
   describe 'delete' do
     it 'lets you delete a client from the database' do
-      client1 = Client.new({name: 'Tacocat de Gato', id: nil})
+      client1 = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client1.save
-      client2 = Client.new({name: 'Tacocat de Perro', id: nil})
+      client2 = Client.new({name: 'Tacocat de Perro', stylist_id: 0, id: nil})
       client2.save
       client1.delete
       expect(Client.all).to(eq([client2]))
@@ -53,16 +53,16 @@ describe Client do
 
   describe '#==' do
     it 'is the same client if it has the same name' do
-      client1 = Client.new({name: 'Tacocat de Gato', id: nil})
-      client2 = Client.new({name: 'Tacocat de Gato', id: nil})
+      client1 = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
+      client2 = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       expect(client1).to(eq(client2))
     end
   end
 
   describe '.find' do
     it 'finds the client by its id' do
-      client1 = Client.new({name: 'Tacocat de Gato', id: nil})
-      client2 = Client.new({name: 'Tacocat de Gato', id: nil})
+      client1 = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
+      client2 = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client1.save
       client2.save
       expect(Client.find(client1.id)).to eq client1
