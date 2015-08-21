@@ -31,21 +31,30 @@ describe Stylist do
     end
   end
 
+  describe 'update' do
+    it 'lets you update stylists in the database' do
+      stylist = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      stylist.save
+      stylist.update({name: 'Tacocat de Perro'})
+      expect(stylist.name).to(eq('Tacocat de Perro'))
+    end
+  end
+
   describe '#==' do
     it 'is the same stylist if it has the same name' do
-      list1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
-      list2 = Stylist.new({name: 'Tacocat de Gato', id: nil})
-      expect(list1).to(eq(list2))
+      stylist1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      stylist2 = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      expect(stylist1).to(eq(stylist2))
     end
   end
 
   describe '.find' do
     it 'finds the stylist by its id' do
-      list1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
-      list2 = Stylist.new({name: 'Tacocat de Gato', id: nil})
-      list1.save
-      list2.save
-      expect(Stylist.find(list1.id)).to eq list1
+      stylist1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      stylist2 = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      stylist1.save
+      stylist2.save
+      expect(Stylist.find(stylist1.id)).to eq stylist1
     end
   end
 
