@@ -46,7 +46,7 @@ get '/stylists/:id' do # done
   erb(:stylist)
 end
 
-patch '/stylists/:id' do
+patch '/stylists/:id' do # done
   id = params.fetch('id').to_i
   new_name = params.fetch('new_name')
 
@@ -57,7 +57,7 @@ patch '/stylists/:id' do
   erb(:stylist)
 end
 
-delete '/stylists/:id' do
+delete '/stylists/:id' do # done
   id = params.fetch('id').to_i
 
   stylist = Stylist.find(id)
