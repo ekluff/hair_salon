@@ -40,6 +40,17 @@ describe Stylist do
     end
   end
 
+  describe 'delete' do
+    it 'lets you delete a stylist from the database' do
+      stylist1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
+      stylist1.save
+      stylist2 = Stylist.new({name: 'Tacocat de Perro', id: nil})
+      stylist2.save
+      stylist1.delete
+      expect(Stylist.all).to(eq([stylist2]))
+    end
+  end
+
   describe '#==' do
     it 'is the same stylist if it has the same name' do
       stylist1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
