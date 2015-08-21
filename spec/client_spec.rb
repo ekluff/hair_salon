@@ -69,4 +69,14 @@ describe Client do
     end
   end
 
+  describe '#stylist' do
+    it 'returns the stylist object with an id corresponding to a client stylist_id' do
+      stylist = Stylist.new({name: 'Tacocat de Gato'})
+      stylist.save
+      client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
+      client.save
+      expect(client.stylist).to eq stylist
+    end
+  end
+
 end
