@@ -1,7 +1,7 @@
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/list')
-require('./lib/task')
+require('./lib/stylist')
+require('./lib/client')
 require('pg')
 require('./spec/spec_helper')
 also_reload('lib/**/*.rb')
@@ -14,67 +14,67 @@ before do
 end
 
 get '/'  do
-	@lists = List.all
+  @stylists = Stylist.all # may use to display all stylists on index if have time
+  @clients = Client.all # may use to display all clients on index if have time
 	erb(:index)
 end
 
-get('/list/new') do
-	erb(:list_form)
+# client routes
+
+get '/clients' do
+
+  erb(:clients)
 end
 
-post('/list/new') do
-	category = params.fetch('category')
-	name = params.fetch('name')
+post '/clients/new' do
 
-	List.new({category: category, name: name}).save
-
-	@lists = List.all
-
-	erb(:index)
+  erb(:clients)
 end
 
-get '/list/:id' do
-	id = params.fetch('id').to_i
-	@lists = List.all
-	@list = List.find(id)
-	@tasks = @list.tasks # to build #tasks
+get '/clients/:id' do
+  id = params.fetch('id')
 
-	erb(:list_detail)
+  erb(:client)
 end
 
-post '/list/:id/task/new' do
-	id = params.fetch('id').to_i
-	description = params.fetch('description')
-	due_date = params.fetch('due_date')
+patch '/clients/:id' do
+  id = params.fetch('id')
 
-	@list = List.find(id)
-
-	Task.new({description: description, due_date: due_date, list_id: id}).save
-
-	@tasks = @list.tasks
-
-	erb(:list_detail)
+  erb(:client)
 end
 
-post '/list/:id/:description/complete' do
-	id = params.fetch('id').to_i
-	description = params.fetch('description')
+delete '/clients/:id' do
+  id = params.fetch('id')
 
-	@lists = List.all
-	@list = List.find(id)
+  erb(:clients)
+end
 
+# stylist routes
 
-	@task = nil
+get '/stylists' do
 
-	Task.all.each do |task|
-		if task.description == description
-			@task = task
-		end
-	end
+  erb(:stylists)
+end
 
-	@task.completed
+post '/stylists/new' do
 
-	@tasks = @list.tasks
+  erb(:stylists)
+end
 
-	erb(:list_detail)
+get '/stylists/:id' do
+  id = params.fetch('id')
+
+  erb(:stylist)
+end
+
+patch '/stylists/:id' do
+  id = params.fetch('id')
+
+  erb(:stylist)
+end
+
+delete '/stylists/:id' do
+  id = params.fetch('id')
+
+  erb(:stylists)
 end
