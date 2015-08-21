@@ -6,7 +6,7 @@ set(:show_exceptions, false)
 
 describe('the stylist path') do
   describe('visiting the stylists page', {:type => :feature}) do
-    it 'allows a user to visit a page that displays all the stylists' do
+    it 'allows you to visit a page that displays all the stylists' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       visit('/')
@@ -16,7 +16,7 @@ describe('the stylist path') do
   end
 
   describe('adding a new stylist', {:type => :feature}) do
-    it 'allows the user to add a new stylist' do
+    it 'allows the user to add a new stylist on the stylists page' do
       visit('/stylists')
       fill_in('name', with: 'Tacocat de Gato')
       click_button('+ stylist')
@@ -25,7 +25,7 @@ describe('the stylist path') do
   end
 
   describe('visiting a stylist page', {:type => :feature}) do
-    it 'allows you to click the name of a stylist and see their name and clients' do
+    it 'allows you to view the name and clients of a stylist' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
@@ -42,7 +42,7 @@ describe('the stylist path') do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       visit("/stylists/#{stylist.id}")
-      fill_in('new_client', with: 'Tacocat de Perro')
+      fill_in('name', with: 'Tacocat de Perro')
       click_button('+ client')
       expect(page).to have_content('Tacocat de Perro')
     end
@@ -59,13 +59,15 @@ describe('the stylist path') do
     end
   end
 
-  describe('deleting a stylist', {:type => :feature}) do
+  describe('clicking the delete button on the stylist page', {:type => :feature}) do
     it 'allows you to delete a stylist and delivers you to back to the stylists page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
+      stylist2 = Stylist.new({name: 'Tacocat de Perro'})
       stylist.save
+      stylist2.save
       visit("/stylists/#{stylist.id}")
       click_button('delete')
-      expect(page).not.to have_content('Tacocat de Gato')
+      expect(page).to have_no_content('Tacocat de Gato')
     end
   end
 end
@@ -83,8 +85,8 @@ describe('the client path') do
     end
   end
 
-  describe('adding a new client', {:type => :feature}) do
-    it 'allows the user to add a new client' do
+  describe('filling in client name and clicking submit on the clients page', {:type => :feature}) do
+    it 'allows you to add a new client' do
       visit('/clients')
       fill_in('name', with: 'Tacocat de Gato')
       click_button('+ client')
@@ -93,7 +95,7 @@ describe('the client path') do
   end
 
   describe('visiting a client page', {:type => :feature}) do
-    it 'allows you to add click the name of a client and see their name and stylist' do
+    it 'allows you to click the name of a client and see their name and stylist' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
@@ -118,7 +120,7 @@ describe('the client path') do
     end
   end
 
-  describe('deleting a client', {:type => :feature}) do
+  describe('clicking a client delete button', {:type => :feature}) do
     it 'allows you to delete a client and delivers you to back to the clients page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
@@ -126,7 +128,7 @@ describe('the client path') do
       client.save
       visit("/clients/#{client.id}")
       click_button('delete')
-      expect(page).not.to have_content('Tacocat de Gato')
+      expect(page).to have_no_content('Tacocat de Gato')
     end
   end
 end

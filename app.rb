@@ -15,8 +15,6 @@ before do
 end
 
 get '/'  do # done
-  @stylists = Stylist.all # may use to display all stylists on index if have time
-  @clients = Client.all # may use to display all clients on index if have time
 	erb(:index)
 end
 
@@ -49,10 +47,10 @@ end
 
 patch '/stylists/:id' do # done
   id = params.fetch('id').to_i
-  new_name = params.fetch('new_name')
+  name = params.fetch('name')
 
   @stylist = Stylist.find(id)
-  @stylist.update({name: new_name})
+  @stylist.update({name: name})
   @clients = @stylist.clients
 
   erb(:stylist)
@@ -69,6 +67,19 @@ delete '/stylists/:id' do # done
   erb(:stylists)
 end
 
+post '/stylists/new/client' do
+  name = params.fetch('name')
+  stylist_id = params.fetch('stylist_id').to_i
+
+  client = Client.new({name: name, stylist_id: stylist_id})
+  client.save
+
+  @stylist = Stylist.find(stylist_id)
+  @clients = @stylist.clients
+
+  erb(:stylist)
+end
+
 # client routes
 
 get '/clients' do # done
@@ -80,7 +91,7 @@ end
 
 post '/clients/new' do # done
   name = params.fetch('name')
-  stylist_id = params.fetch('stylist_id')
+  stylist_id = params.fetch('stylist_id').to_i
 
   client = Client.new({name: name, stylist_id: stylist_id})
   client.save
@@ -126,7 +137,7 @@ delete '/clients/:id' do #done
   client.delete
 
   @clients = Client.all
-  @stylist = Stylist.all
+  @stylists = Stylist.all
 
   erb(:clients)
 end
