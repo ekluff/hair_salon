@@ -15,7 +15,7 @@
 
         <td width="40%">
           <label hidden for="name">change stylist name</label>
-          <input class="form-control" type="text" name="new_name" id="new_name" placeholder="change stylist name">
+          <input class="form-control" type="text" name="new_name" id="new_name" placeholder="change stylist name" required>
         </td>
 
         <!-- <td width="40%">
@@ -31,16 +31,14 @@
         <td width="10%">
           <button class="btn btn-primary btn-sm form-control" name="submit" type="submit">save</button>
         </td>
-
-        <td width="10%">
-          <form class="form-inline" action="/stylists/<%= @stylist.id %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit" name="delete" class="form-control btn btn-danger btn-sm text-center">delete stylist</button>
-          </form>
-        </td>
-
-
       </form>
+
+      <td width="10%">
+        <form action="/stylists/<%= @stylist.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" name="delete" class="form-control btn btn-danger btn-sm text-center">delete stylist</button>
+        </form>
+      </td>
     </tr>
   </table>
   <a class="btn btn-warning btn-sm" href='/'>home</a>

@@ -3,6 +3,7 @@ require('sinatra/reloader')
 require('./lib/stylist')
 require('./lib/client')
 require('pg')
+require 'pry'
 # require('./spec/spec_helper')
 also_reload('lib/**/*.rb')
 
