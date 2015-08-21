@@ -1,0 +1,54 @@
+<div class="row text-center">
+  <h3>stylists</h3>
+
+
+  <table class="table table-hover">
+    <tr id="first-row">
+      <th width="40%" class="text-center">name</th>
+      <!-- <th width="40%" class="text-center">stylist</th> -->
+      <th width="10%"></th>
+    </tr>
+    <% @stylists.each do |stylist| %>
+      <tr>
+        <td class="text-center">
+          <a href="/stylists/<%= stylist.id %>"><%= stylist.name %></a>
+        </td>
+        <td>
+          <form action="/stylists/<%= stylist.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" name="delete" class="form-control btn btn-danger btn-sm">delete stylist</button>
+          </form>
+        </td>
+        <!-- <td>
+          <a href="/stylists/< stylist.stylist_id %>">< stylist.stylist.name %></a>
+        </td> -->
+      </tr>
+    <% end %>
+
+    <tr>
+      <form class="form-inline" action="/stylists/new" method="post">
+
+        <td width="40%">
+          <label hidden for="name">new stylist name</label>
+          <input class="form-control" type="text" name="name" id="name" placeholder="new stylist name" required>
+        </td>
+
+        <!-- <td width="40%">
+          <label hidden for="stylist">new stylist stylist</label>
+          <select class="form-control" name="stylist_id">
+            <option value="" disabled selected>new stylist stylist</option>
+            < @stylists.each do |stylist| %>
+              <option value="< stylist.id %>">< stylist.name %></option>
+            < end %>
+          </select>
+        </td> -->
+
+        <td width="10%">
+          <button class="btn btn-primary btn-sm form-control" name="submit" type="submit">+ stylist</button>
+        </td>
+
+      </form>
+    </tr>
+  </table>
+  <a class="btn btn-warning btn-sm" href='/'>home</a>
+</div>
