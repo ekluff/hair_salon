@@ -107,8 +107,14 @@ patch '/clients/:id' do #done
   new_stylist_id = params.fetch('new_stylist_id').to_i
 
   @client = Client.find(id)
-  @client.update({name: new_name, })
+
+  if new_name == ""
+    new_name = @client.name
+  end
+    
+  @client.update({name: new_name, stylist_id: new_stylist_id})
   @stylist = @client.stylist
+  @stylists = Stylist.all
 
   erb(:client)
 end

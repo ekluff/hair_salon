@@ -20,9 +20,9 @@
       <td width="40%">
         <label hidden for="stylist">change client stylist</label>
         <select class="form-control" name="new_stylist_id">
-          <option value="<%= @stylist.id %>" disabled selected>change client stylist</option>
+          <option value="<%= @stylist.id %>">change client stylist</option>
           <% @stylists.each do |stylist| %>
-            <option value="<%= @stylist.id %>"><%= stylist.name %></option>
+            <option value="<%= stylist.id %>"><%= stylist.name %></option>
           <% end %>
         </select>
       </td>
