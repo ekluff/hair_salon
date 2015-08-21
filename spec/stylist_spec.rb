@@ -51,6 +51,21 @@ describe Stylist do
     end
   end
 
+  describe 'delete' do
+    it 'deletes a stylists clients from the database' do
+      stylist = Stylist.new({name: 'Tacocat de Gato'})
+      stylist.save
+      client1 = Client.new({name: 'Monsignor Schnacky', stylist_id: stylist.id})
+      client2 = Client.new({name: 'Edward Vampire', stylist_id: stylist.id})
+      client3 = Client.new({name: 'Prince Price Williams', stylist_id: stylist.id})
+      client1.save
+      client2.save
+      client3.save
+      stylist.delete
+      expect(Client.all).to eq []
+    end
+  end
+
   describe '#==' do
     it 'is the same stylist if it has the same name' do
       stylist1 = Stylist.new({name: 'Tacocat de Gato', id: nil})
