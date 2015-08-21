@@ -13,12 +13,14 @@
         <td class="text-center">
           <a href="/stylists/<%= stylist.id %>"><%= stylist.name %></a>
         </td>
-        <td>
-          <form action="/stylists/<%= stylist.id %>" method="post">
+
+        <form action="/stylists/<%= stylist.id %>" method="post">
+          <td>
             <input type="hidden" name="_method" value="delete">
             <button type="submit" name="delete" class="form-control btn btn-danger btn-sm">delete stylist</button>
-          </form>
-        </td>
+          </td>
+        </form>
+
         <!-- <td>
           <a href="/stylists/< stylist.stylist_id %>">< stylist.stylist.name %></a>
         </td> -->
