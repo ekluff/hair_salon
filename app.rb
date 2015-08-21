@@ -90,7 +90,7 @@ post '/clients/new' do # done
   erb(:clients)
 end
 
-get '/clients/:id' do
+get '/clients/:id' do #done
   id = params.fetch('id').to_i
 
   @client = Client.find(id)
@@ -99,12 +99,13 @@ get '/clients/:id' do
   erb(:client)
 end
 
-patch '/clients/:id' do
+patch '/clients/:id' do #done
   id = params.fetch('id').to_i
   new_name = params.fetch('new_name')
+  new_stylist_id = params.fetch('new_stylist_id').to_i
 
   @client = Client.find(id)
-  @client.update({name: new_name})
+  @client.update({name: new_name, })
   @stylist = @client.stylist
 
   erb(:client)

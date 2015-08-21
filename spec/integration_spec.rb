@@ -54,7 +54,7 @@ describe('the stylist path') do
       stylist.save
       visit("/stylists/#{stylist.id}")
       fill_in('new_name', with: 'Tacocat de Perro')
-      click_button('change')
+      click_button('save')
       expect(page).to have_content('Tacocat de Perro')
     end
   end
@@ -113,7 +113,7 @@ describe('the client path') do
       client.save
       visit("/clients/#{client.id}")
       fill_in('new_name', with: 'Tacocat de Perro')
-      click_button('change')
+      click_button('save')
       expect(page).to have_content('Tacocat de Perro')
     end
   end
