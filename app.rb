@@ -4,7 +4,6 @@ require('./lib/stylist')
 require('./lib/client')
 require('pg')
 require 'pry'
-# require('./spec/spec_helper')
 also_reload('lib/**/*.rb')
 
 DB = PG.connect({dbname: 'hair_salon'})
@@ -60,7 +59,7 @@ delete '/stylists/:id' do # done
   id = params.fetch('id').to_i
 
   stylist = Stylist.find(id)
-  stylist.delete
+  stylist.delete unless Stylist.all == []
 
   @stylists = Stylist.all
 
@@ -134,7 +133,7 @@ delete '/clients/:id' do #done
   id = params.fetch('id').to_i
 
   client = Client.find(id)
-  client.delete
+  client.delete unless Client.all == []
 
   @clients = Client.all
   @stylists = Stylist.all
