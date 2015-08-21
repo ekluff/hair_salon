@@ -95,6 +95,7 @@ get '/clients/:id' do #done
 
   @client = Client.find(id)
   @stylist = @client.stylist
+  @stylists = Stylist.all
 
   erb(:client)
 end
