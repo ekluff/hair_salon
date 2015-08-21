@@ -3,7 +3,7 @@ require('sinatra/reloader')
 require('./lib/stylist')
 require('./lib/client')
 require('pg')
-require('./spec/spec_helper')
+# require('./spec/spec_helper')
 also_reload('lib/**/*.rb')
 
 DB = PG.connect({dbname: 'hair_salon'})
@@ -70,14 +70,14 @@ end
 
 # client routes
 
-get '/clients' do
+get '/clients' do # done
   @clients = Client.all
   @stylists = Stylist.all
 
   erb(:clients)
 end
 
-post '/clients/new' do
+post '/clients/new' do # done
   name = params.fetch('name')
   stylist_id = params.fetch('stylist_id')
 

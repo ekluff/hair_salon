@@ -1,0 +1,48 @@
+<div class="row text-center">
+  <h3>clients</h3>
+
+
+<table class="table table-hover">
+  <tr id="first-row">
+    <th width="40%" class="text-center">name</th>
+    <th width="40%" class="text-center">stylist</th>
+    <th width="10"></th>
+  </tr>
+  <% @clients.each do |client| %>
+    <tr>
+      <td>
+        <a href="/clients/<%= client.id %>"><%= client.name %></a>
+      </td>
+      <td>
+        <a href="/stylists/<%= client.stylist_id %>"><%= client.stylist.name %></a>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr>
+    <form class="form-inline" action="/clients/new" method="post">
+
+      <td width="40%">
+        <label hidden for="name">new client name</label>
+        <input class="form-control" type="text" name="name" id="name" placeholder="new client name">
+      </td>
+
+      <td width="40%">
+        <label hidden for="stylist">new client stylist</label>
+        <select class="form-control" name="stylist_id">
+          <option value="" disabled selected>new client stylist</option>
+          <% @stylists.each do |stylist| %>
+            <option value="<%= stylist.id %>"><%= stylist.name %></option>
+          <% end %>
+        </select>
+      </td>
+
+      <td width="10%">
+        <button class="btn btn-primary btn-sm" name="submit" type="submit">+ client</button>
+      </td>
+
+    </form>
+  </tr>
+</table>
+
+</div>
