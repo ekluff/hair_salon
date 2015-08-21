@@ -43,6 +43,16 @@ class Client
     end
   end
 
+  def stylist
+    found_stylist = nil
+    Stylist.all.each do |stylist|
+      if self.stylist_id == stylist.id
+        found_stylist = stylist
+      end
+    end
+    found_stylist
+  end
+
   def ==(another_client)
     self.id == another_client.id
   end
