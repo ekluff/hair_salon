@@ -13,7 +13,7 @@ before do
 	cache_control :views, :no_cache
 end
 
-get '/'  do
+get '/'  do # done
   @stylists = Stylist.all # may use to display all stylists on index if have time
   @clients = Client.all # may use to display all clients on index if have time
 	erb(:index)
@@ -21,13 +21,13 @@ end
 
 # stylist routes
 
-get '/stylists' do
+get '/stylists' do # done
   @stylists = Stylist.all
 
   erb(:stylists)
 end
 
-post '/stylists/new' do
+post '/stylists/new' do # done
   name = params.fetch('name')
 
   Stylist.new({name: name}).save
@@ -37,7 +37,7 @@ post '/stylists/new' do
   erb(:stylists)
 end
 
-get '/stylists/:id' do
+get '/stylists/:id' do # done
   id = params.fetch('id').to_i
 
   @stylist = Stylist.find(id)
@@ -111,7 +111,7 @@ patch '/clients/:id' do #done
   erb(:client)
 end
 
-delete '/clients/:id' do
+delete '/clients/:id' do #done
   id = params.fetch('id').to_i
 
   client = Client.find(id)
