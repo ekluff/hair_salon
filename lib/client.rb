@@ -3,7 +3,7 @@ class Client
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
-    @stylist_id = attributes.fetch(:stylist_id)
+    @stylist_id = attributes.fetch(:stylist_id).to_i
     @id = attributes.fetch(:id, nil).to_i
   end
 
@@ -28,7 +28,7 @@ class Client
     @name = attributes.fetch(:name)
     @stylist_id = attributes.fetch(:stylist_id)
     @id = self.id
-    DB.exec("UPDATE clients SET (name, stylist_id) VALUES ('#{@name}', '#{@stylist_id}') WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET name = '#{@name}', stylist_id = '#{@stylist_id}' WHERE id = #{@id};")
   end
 
   def delete

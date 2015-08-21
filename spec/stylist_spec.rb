@@ -94,6 +94,7 @@ describe Stylist do
       client1.save
       client2.save
       client3.save
+      # binding.pry
       expect(stylist.clients).to(eq([client1, client3]))
     end
   end

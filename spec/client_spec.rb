@@ -35,7 +35,7 @@ describe Client do
     it 'lets you update clients in the database' do
       client = Client.new({name: 'Tacocat de Gato', stylist_id: 0, id: nil})
       client.save
-      client.update({name: 'Tacocat de Perro'})
+      client.update({name: 'Tacocat de Perro', stylist_id: 0})
       expect(client.name).to(eq('Tacocat de Perro'))
     end
   end
