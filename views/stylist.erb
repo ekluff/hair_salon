@@ -1,43 +1,47 @@
 <div class="row text-center">
   <h3>stylist detail</h3>
 
-<table class="table table-hover">
-  <tr id="first-row">
-    <th width="40%" class="text-center">name: <%= stylist.name %></th>
-    <!-- <th width="40%" class="text-center">stylist: < stylist.name %></th> -->
-    <th width="10%"></th>
-  </tr>
+  <table class="table table-hover">
+    <tr id="first-row">
+      <th width="40%" class="text-center">name: <%= @stylist.name %></th>
+      <!-- <th width="40%" class="text-center">stylist: < stylist.name %></th> -->
+      <th width="10%"></th>
+      <th width="10%"></th>
+    </tr>
 
-  <tr>
-    <form class="form-inline" action="/stylists/<%= stylist.id %>" method="post">
-      <input type="hidden" name="_method" value="patch">
+    <tr>
+      <form class="form-inline" action="/stylists/<%= @stylist.id %>" method="post">
+        <input type="hidden" name="_method" value="patch">
 
-      <td width="40%">
-        <label hidden for="name">change stylist name</label>
-        <input class="form-control" type="text" name="new_name" id="new_name" placeholder="change stylist name" value="<%= stylist.name %>">
-      </td>
+        <td width="40%">
+          <label hidden for="name">change stylist name</label>
+          <input class="form-control" type="text" name="new_name" id="new_name" placeholder="change stylist name">
+        </td>
 
-      <!-- <td width="40%">
-        <label hidden for="stylist">change client stylist</label>
-        <select class="form-control" name="new_stylist_id">
-          <option value="< stylist.id %>" disabled selected>change client stylist</option>
-          < @stylists.each do |stylist| %>
-            <option value="< stylist.id %>">< stylist.name %></option>
-          < end %>
-        </select>
-      </td> -->
+        <!-- <td width="40%">
+          <label hidden for="stylist">change client stylist</label>
+          <select class="form-control" name="new_stylist_id">
+            <option value="< stylist.id %>" disabled selected>change client stylist</option>
+            < @stylists.each do |stylist| %>
+              <option value="< stylist.id %>">< stylist.name %></option>
+            < end %>
+          </select>
+        </td> -->
 
-      <td width="10%">
-        <button class="btn btn-primary btn-sm form-control" name="submit" type="submit">save</button>
-      </td>
+        <td width="10%">
+          <button class="btn btn-primary btn-sm form-control" name="submit" type="submit">save</button>
+        </td>
 
-    </form>
-  </tr>
-</table>
+        <td width="10%">
+          <form class="form-inline" action="/stylists/<%= @stylist.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" name="delete" class="form-control btn btn-danger btn-sm text-center">delete stylist</button>
+          </form>
+        </td>
 
-<form class="form-inline" action="/stylists/<%= stylist.id %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit" name="delete" class="form-control btn btn-danger btn-lg">delete stylist</button>
-</form>
 
+      </form>
+    </tr>
+  </table>
+  <a class="btn btn-warning btn-sm" href='/'>home</a>
 </div>
