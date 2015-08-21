@@ -25,7 +25,7 @@ describe('the stylist path') do
   end
 
   describe('visiting a stylist page', {:type => :feature}) do
-    it 'allows you to add click the name of a stylist and see their name and clients' do
+    it 'allows you to click the name of a stylist and see their name and clients' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
@@ -38,22 +38,22 @@ describe('the stylist path') do
   end
 
   describe('adding a new client to on the stylist page') do
-    it 'allows you to add a client to a stylist from the stylist detail page' do
+    it 'allows you to add a client to a stylist from the stylist page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       visit("/stylists/#{stylist.id}")
-      fill_in('client_name', with: 'Tacocat de Perro')
+      fill_in('new_client', with: 'Tacocat de Perro')
       click_button('+ client')
       expect(page).to have_content('Tacocat de Perro')
     end
   end
 
   describe('changing the name of a stylist') do
-    it 'allows you to change the name of a stylist' do
+    it 'allows you to change the name of a stylist from the stylist page' do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       visit("/stylists/#{stylist.id}")
-      fill_in('stylist_name', with: 'Tacocat de Perro')
+      fill_in('new_name', with: 'Tacocat de Perro')
       click_button('change')
       expect(page).to have_content('Tacocat de Perro')
     end
@@ -64,7 +64,7 @@ describe('the stylist path') do
       stylist = Stylist.new({name: 'Tacocat de Gato'})
       stylist.save
       visit("/stylists/#{stylist.id}")
-      click_button('delete stylist')
+      click_button('delete')
       expect(page).not.to have_content('Tacocat de Gato')
     end
   end
@@ -86,7 +86,7 @@ describe('the client path') do
   describe('adding a new client', {:type => :feature}) do
     it 'allows the user to add a new client' do
       visit('/clients')
-      fill_in('client_name', with: 'Tacocat de Gato')
+      fill_in('name', with: 'Tacocat de Gato')
       click_button('+ client')
       expect(page).to have_content('Tacocat de Gato')
     end
@@ -107,10 +107,12 @@ describe('the client path') do
 
   describe('changing the name of a client') do
     it 'allows you to change the name of a client on the client page' do
-      client = Client.new({name: 'Tacocat de Gato'})
+      stylist = Stylist.new({name: 'Tacocat de Gato'})
+      stylist.save
+      client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
       client.save
       visit("/clients/#{client.id}")
-      fill_in('client_name', with: 'Tacocat de Perro')
+      fill_in('new_name', with: 'Tacocat de Perro')
       click_button('change')
       expect(page).to have_content('Tacocat de Perro')
     end
@@ -118,10 +120,12 @@ describe('the client path') do
 
   describe('deleting a client') do
     it 'allows you to delete a client and delivers you to back to the clients page' do
-      client = Client.new({name: 'Tacocat de Gato'})
+      stylist = Stylist.new({name: 'Tacocat de Gato'})
+      stylist.save
+      client = Client.new({name: 'Tacocat de Perro', stylist_id: stylist.id})
       client.save
       visit("/clients/#{client.id}")
-      click_button('delete client')
+      click_button('delete')
       expect(page).not.to have_content('Tacocat de Gato')
     end
   end
